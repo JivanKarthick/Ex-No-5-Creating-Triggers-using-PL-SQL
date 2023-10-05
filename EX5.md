@@ -15,14 +15,14 @@
 ### Program:
 ### Create employee table
 ```
-CREATE TABLE employed(
+CREATE TABLE employedd(
   empid NUMBER,
   empname VARCHAR2(10),
   dept VARCHAR2(10),
   salary NUMBER
 );
 
-CREATE TABLE sal_log (
+CREATE TABLE sal_logg (
   log_id NUMBER GENERATED ALWAYS AS IDENTITY,
   empid NUMBER,
   empname VARCHAR2(10),
@@ -31,46 +31,49 @@ CREATE TABLE sal_log (
   update_date DATE
 );
 -- Insert the values in the employee table
-insert into employed values(1,'Shakthi','IT',1000000);
-insert into employed values(2,'Suju','SALES',500000)
+insert into employedd values(1,'gojo','IT',1000000);
+insert into employedd values(2,'Sojo','SALES',500000)
 ```
 ### Create employee table
-![image](https://github.com/JivanKarthick/Ex-No-5-Creating-Triggers-using-PL-SQL/assets/121165867/9ef122da-753e-4ef4-8b1e-8fe1213f4b84)
+![image](https://github.com/JivanKarthick/Ex-No-5-Creating-Triggers-using-PL-SQL/assets/121165867/518d8d34-4b8c-404f-ab03-967bb207217e)
+
 
 ### Create salary_log table
-![image](https://github.com/JivanKarthick/Ex-No-5-Creating-Triggers-using-PL-SQL/assets/121165867/9eda787b-aa82-44fa-a01b-e49c89612727)
+![image](https://github.com/JivanKarthick/Ex-No-5-Creating-Triggers-using-PL-SQL/assets/121165867/a8db6f05-1df9-4b9a-aeed-cf19d06e86c0)
+
 
 
 
 ### PLSQL Trigger code
 ```
 -- Create the trigger
-CREATE OR REPLACE TRIGGER log_sal_update
-BEFORE UPDATE ON employed
+CREATE OR REPLACE TRIGGER logg_sal_update
+BEFORE UPDATE ON employedd
 FOR EACH ROW
 BEGIN
   IF :OLD.salary != :NEW.salary THEN
-    INSERT INTO sal_log (empid, empname, old_salary, new_salary, update_date)
+    INSERT INTO sal_logg (empid, empname, old_salary, new_salary, update_date)
     VALUES (:OLD.empid, :OLD.empname, :OLD.salary, :NEW.salary, SYSDATE);
   END IF;
 END;
 /
 -- Insert the values in the employee table
-insert into employed values(1,'Shakthi','IT',1000000);
-insert into employed values(2,'Suju','SALES',500000);
+insert into employed values(2,'Sojo','SALES',500000);
+insert into employedd values(1,'gojo','IT',1000000);
 
 -- Update the salary of an employee
-UPDATE employed
-SET salary = 60000
-WHERE empid = 1;
+UPDATE employedd
+SET salary = 600000
+WHERE empid=2;
 -- Display the employee table
-SELECT * FROM employed;
+SELECT * FROM employedd;
 
 -- Display the salary_log table
-SELECT * FROM sal_log;
+SELECT * FROM sal_logg;
 ```
 ### Output:
-![image](https://github.com/JivanKarthick/Ex-No-5-Creating-Triggers-using-PL-SQL/assets/121165867/020a68eb-165f-46e3-b425-d1c789e62bf3)
+
+![image](https://github.com/JivanKarthick/Ex-No-5-Creating-Triggers-using-PL-SQL/assets/121165867/b8b72ac9-02a5-460a-9752-f6f039526c68)
 
 
 ### Result:
